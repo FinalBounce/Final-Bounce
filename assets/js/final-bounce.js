@@ -68,6 +68,19 @@ document.addEventListener("DOMContentLoaded", () => {
     year.textContent = new Date().getFullYear();
   });
 
+  const equipmentTriggers = document.querySelectorAll(".equipment-list__trigger");
+  const compactPointer = window.matchMedia("(hover: none), (pointer: coarse)");
+
+  equipmentTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      if (!compactPointer.matches) return;
+
+      const isExpanded = trigger.getAttribute("aria-expanded") === "true";
+      equipmentTriggers.forEach((item) => item.setAttribute("aria-expanded", "false"));
+      trigger.setAttribute("aria-expanded", String(!isExpanded));
+    });
+  });
+
   const contactForm = document.querySelector("[data-contact-form]");
 
   if (contactForm) {

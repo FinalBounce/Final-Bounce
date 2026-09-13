@@ -962,12 +962,22 @@ footer[id] {
 }
 
 .equipment-list li {
+  border-bottom: 0.1rem solid rgb(255 255 255 / 28%);
+}
+
+.equipment-list__trigger {
   display: grid;
   grid-template-columns: 4rem 1fr auto;
   gap: 1rem;
   align-items: center;
+  width: 100%;
   padding-block: clamp(1rem, 2.1vw, 2rem);
-  border-bottom: 0.1rem solid rgb(255 255 255 / 28%);
+  color: inherit;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
 }
 
 .equipment-list__number {
@@ -977,11 +987,26 @@ footer[id] {
   font-weight: 700;
 }
 
-.equipment-list strong {
+.equipment-list__title {
+  display: grid;
   font-size: clamp(2.4rem, 6.7vw, 7rem);
   font-weight: 700;
   letter-spacing: -0.065em;
   line-height: 0.9;
+}
+
+.equipment-list__examples {
+  max-height: 0;
+  margin-top: 0;
+  overflow: hidden;
+  color: rgb(255 253 246 / 72%);
+  font-size: clamp(0.76rem, 1.2vw, 1rem);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.3;
+  opacity: 0;
+  transform: translateY(-0.4rem);
+  transition: max-height 0.3s var(--ease), margin-top 0.3s var(--ease), opacity 0.22s ease, transform 0.3s var(--ease);
 }
 
 .equipment-list__dot {
@@ -992,9 +1017,35 @@ footer[id] {
   transition: border-radius 0.25s ease, transform 0.25s ease;
 }
 
-.equipment-list li:hover .equipment-list__dot {
+.equipment-list li:hover .equipment-list__dot,
+.equipment-list__trigger:focus-visible .equipment-list__dot,
+.equipment-list__trigger[aria-expanded="true"] .equipment-list__dot {
   border-radius: 0;
   transform: rotate(45deg);
+}
+
+.equipment-list__trigger:focus-visible {
+  outline: 0.18rem solid var(--acid);
+  outline-offset: -0.35rem;
+}
+
+@media (hover: hover) {
+  .equipment-list li:hover .equipment-list__examples,
+  .equipment-list__trigger:focus-visible .equipment-list__examples {
+    max-height: 3.5rem;
+    margin-top: 0.72rem;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .equipment-list__trigger[aria-expanded="true"] .equipment-list__examples {
+    max-height: 3.5rem;
+    margin-top: 0.72rem;
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .equipment__link {
@@ -1069,6 +1120,10 @@ footer[id] {
   background: var(--paper-bright);
   border: 0.12rem solid var(--ink);
   box-shadow: 0.65rem 0.65rem 0 var(--ink);
+}
+
+.contact__details + .contact-form {
+  grid-column: 1 / -1;
 }
 
 .contact-form__grid {
@@ -1968,11 +2023,11 @@ footer[id] {
     min-height: 20rem;
   }
 
-  .equipment-list li {
+  .equipment-list__trigger {
     grid-template-columns: 2.5rem minmax(0, 1fr) auto;
   }
 
-  .equipment-list strong {
+  .equipment-list__title {
     font-size: clamp(2.25rem, 13vw, 4.4rem);
   }
 
