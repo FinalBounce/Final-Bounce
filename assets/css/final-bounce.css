@@ -684,6 +684,29 @@ footer[id] {
   overflow-wrap: anywhere;
 }
 
+.service-card--link {
+  cursor: pointer;
+}
+
+.service-card__link {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.service-card--link:focus-within::after {
+  border-radius: 0;
+  transform: translateX(-50%) rotate(12deg) scale(1.08);
+}
+
+.service-card__link:focus-visible {
+  outline: 0.2rem solid var(--ink);
+  outline-offset: -0.45rem;
+}
+
 .service-card__micro {
   position: absolute;
   top: 1.5rem;
@@ -974,6 +997,10 @@ footer[id] {
   transform: rotate(45deg);
 }
 
+.equipment__link {
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
 /* Contact + footer */
 .contact {
   color: var(--ink);
@@ -1230,6 +1257,16 @@ footer[id] {
   --page-accent-2: var(--pink);
 }
 
+.page-training {
+  --page-accent: var(--pink);
+  --page-accent-2: var(--acid);
+}
+
+.page-equipment-detail {
+  --page-accent: var(--sky);
+  --page-accent-2: var(--violet);
+}
+
 .service-hero {
   position: relative;
   display: grid;
@@ -1302,6 +1339,190 @@ footer[id] {
 
 .service-hero__copy .button {
   margin-top: 0.8rem;
+}
+
+.training-format {
+  padding-block: clamp(3.5rem, 7vw, 7rem);
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.training-format__grid {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 7vw, 8rem);
+  align-items: start;
+}
+
+.training-format h2,
+.gear-section h2 {
+  max-width: 11ch;
+  margin-bottom: 0;
+  font-size: clamp(3rem, 6vw, 6.5rem);
+  font-weight: 750;
+  letter-spacing: -0.075em;
+  line-height: 0.86;
+}
+
+.training-format__facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin: 0;
+}
+
+.training-fact {
+  min-height: 11rem;
+  padding: 1.25rem;
+  background: var(--paper-bright);
+  border: 0.12rem solid var(--ink);
+  box-shadow: 0.42rem 0.42rem 0 var(--ink);
+}
+
+.training-fact:nth-child(2) {
+  background: var(--pink);
+}
+
+.training-fact:nth-child(3) {
+  background: var(--acid);
+}
+
+.training-fact:nth-child(4) {
+  background: var(--sky);
+}
+
+.training-fact dt,
+.gear-card__label {
+  margin-bottom: 2.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.training-fact dd {
+  margin: 0;
+  font-family: var(--font-wild);
+  font-size: clamp(1.45rem, 2.1vw, 2.25rem);
+  font-weight: 750;
+  letter-spacing: -0.05em;
+  line-height: 0.96;
+}
+
+.training-note {
+  margin-top: 1.4rem;
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+.gear-section {
+  color: var(--ink);
+  background: var(--paper-bright);
+}
+
+.gear-section__heading {
+  display: grid;
+  grid-template-columns: minmax(11rem, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(2rem, 7vw, 8rem);
+  margin-bottom: clamp(3rem, 6vw, 6rem);
+}
+
+.gear-section__heading p:last-child {
+  max-width: 39rem;
+  margin-bottom: 0;
+  font-size: clamp(1.08rem, 1.7vw, 1.35rem);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.gear-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.95rem;
+}
+
+.gear-card {
+  min-height: 19rem;
+  padding: 1.3rem;
+  background: var(--paper);
+  border: 0.12rem solid var(--ink);
+}
+
+.gear-card:nth-child(2),
+.gear-card:nth-child(5) {
+  background: var(--page-accent);
+}
+
+.gear-card:nth-child(3),
+.gear-card:nth-child(6) {
+  background: var(--page-accent-2);
+}
+
+.gear-card#instruments {
+  background: var(--paper);
+}
+
+.gear-card#percussions {
+  background: var(--pink);
+}
+
+.gear-card h3 {
+  max-width: 13ch;
+  margin: 0 0 1.45rem;
+  font-family: var(--font-wild);
+  font-size: clamp(1.8rem, 3.2vw, 3.25rem);
+  font-weight: 750;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.gear-card ul {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gear-card li {
+  font-size: 0.96rem;
+  font-weight: 600;
+  line-height: 1.38;
+}
+
+.gear-card li::before {
+  margin-right: 0.45rem;
+  content: "↗";
+  font-weight: 750;
+}
+
+.gear-callout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: end;
+  margin-top: 0.95rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  color: var(--paper-bright);
+  background: var(--ink);
+}
+
+.gear-callout p {
+  max-width: 45rem;
+  margin: 0;
+  font-size: clamp(1.15rem, 2vw, 1.7rem);
+  font-weight: 600;
+  line-height: 1.28;
+}
+
+.gear-callout strong {
+  color: var(--acid);
+  font-family: var(--font-wild);
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  line-height: 0.95;
+  text-align: right;
+  text-transform: uppercase;
 }
 
 .keywords {
@@ -1394,16 +1615,29 @@ footer[id] {
 }
 
 .service-next {
+  display: block;
+  padding-block: clamp(3rem, 7vw, 7rem);
   color: var(--ink);
-  background: var(--page-accent-2);
+  text-decoration: none;
 }
 
-.service-next a {
+.service-next--recording {
+  background: var(--sky);
+}
+
+.service-next--mixing {
+  background: var(--violet);
+}
+
+.service-next--training {
+  background: var(--pink);
+}
+
+.service-next__inner {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 2rem;
   align-items: end;
-  text-decoration: none;
 }
 
 .service-next__label {
@@ -1437,7 +1671,7 @@ footer[id] {
   transition: transform 0.35s var(--ease);
 }
 
-.service-next a:hover .service-next__arrow {
+.service-next:hover .service-next__arrow {
   transform: rotate(45deg) scale(1.07);
 }
 
@@ -1688,6 +1922,16 @@ footer[id] {
   .service-statement__grid {
     grid-template-columns: 1fr;
   }
+
+  .training-format__grid,
+  .gear-section__heading {
+    grid-template-columns: 1fr;
+  }
+
+  .training-format h2,
+  .gear-section h2 {
+    max-width: 13ch;
+  }
 }
 
 @media (max-width: 540px) {
@@ -1778,7 +2022,7 @@ footer[id] {
     font-size: clamp(3.65rem, 17.7vw, 5.4rem);
   }
 
-  .service-next a {
+  .service-next__inner {
     grid-template-columns: 1fr;
   }
 
@@ -1788,6 +2032,25 @@ footer[id] {
 
   .service-next__arrow {
     justify-self: end;
+  }
+
+
+  .training-format__facts,
+  .gear-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .training-fact,
+  .gear-card {
+    min-height: auto;
+  }
+
+  .gear-callout {
+    grid-template-columns: 1fr;
+  }
+
+  .gear-callout strong {
+    text-align: left;
   }
 }
 
