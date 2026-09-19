@@ -597,6 +597,7 @@ footer[id] {
 
 .service-feature {
   position: relative;
+  isolation: isolate;
   min-height: clamp(26rem, 47vw, 44rem);
   padding: clamp(1.5rem, 4vw, 4rem);
   overflow: hidden;
@@ -611,12 +612,35 @@ footer[id] {
   background: var(--violet);
 }
 
-.service-feature:nth-child(2)::before {
-  right: 0;
+.service-feature:first-child {
+  background: var(--paper-bright);
+}
+
+.service-feature.service-feature:first-child::before {
+  right: -5%;
+  bottom: -10%;
+  width: 53%;
+  background: transparent;
+  transition: transform 0.55s var(--ease), background-color 0.35s var(--ease);
+}
+
+.service-feature--training {
+  background: var(--pink);
+}
+
+.service-feature--visual {
+  background: var(--sky);
+}
+
+.service-feature.service-feature:nth-child(2)::before {
+  position: absolute;
+  z-index: 0;
+  right: -6%;
   bottom: 0;
-  width: 60%;
-  height: 48%;
+  width: 47%;
+  height: 30%;
   aspect-ratio: auto;
+  content: "";
   background:
     linear-gradient(var(--ink) 0 0) 0 100% / 8% 42% no-repeat,
     linear-gradient(var(--ink) 0 0) 14% 100% / 8% 66% no-repeat,
@@ -630,10 +654,14 @@ footer[id] {
   clip-path: none;
   transform: none;
   transform-origin: right bottom;
+  transition: transform 0.55s var(--ease);
+  animation: mixage-wave 0.9s ease-in-out infinite;
+  animation-play-state: paused;
 }
 
-.service-feature::before {
+.service-feature:not(.service-feature--training):not(.service-feature--visual):not(:nth-child(2))::before {
   position: absolute;
+  z-index: 0;
   right: -11%;
   bottom: -21%;
   width: 65%;
@@ -644,18 +672,103 @@ footer[id] {
   transition: transform 0.55s var(--ease);
 }
 
-.service-feature:hover::before {
+.service-feature:not(.service-feature--training):not(.service-feature--visual):not(:nth-child(2)):hover::before {
   transform: rotate(28deg) scale(1.08);
 }
 
-.service-feature:nth-child(2):hover::before {
+.service-feature.service-feature:first-child:is(:hover, :focus-visible, :active)::before {
+  background: var(--ink);
+}
+
+.service-feature.service-feature:nth-child(2):hover::before {
   transform: translateX(-4%) scaleY(1.08);
+}
+
+.service-feature.service-feature:nth-child(2):is(:hover, :focus-visible, :active)::before {
+  transform: translateX(-4%) scaleY(1.08);
+  animation-play-state: running;
+}
+
+@keyframes mixage-wave {
+  0%,
+  100% {
+    background-size: 8% 42%, 8% 66%, 8% 54%, 8% 82%, 8% 61%, 8% 75%, 8% 49%;
+  }
+
+  33% {
+    background-size: 8% 68%, 8% 44%, 8% 80%, 8% 51%, 8% 74%, 8% 43%, 8% 65%;
+  }
+
+  66% {
+    background-size: 8% 47%, 8% 78%, 8% 41%, 8% 73%, 8% 55%, 8% 84%, 8% 46%;
+  }
+}
+
+@media (min-width: 1101px) and (max-width: 1200px) {
+  .service-feature.service-feature:first-child::before {
+    border-width: 1.35rem;
+  }
+}
+
+@media (min-width: 801px) {
+  .service-feature.service-feature:first-child::before {
+    right: clamp(-4.6rem, calc(-15% - 2.45rem + 4.58vw), -3.8rem);
+    bottom: -10%;
+  }
+}
+
+@media (min-width: 801px) and (max-width: 1100px) {
+  .service-feature.service-feature:first-child::before {
+    border-width: 1rem;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1400px) {
+  .service-feature.service-feature:first-child::before {
+    border-width: 1.25rem;
+  }
+}
+
+@media (min-width: 1401px) {
+  .service-feature.service-feature:first-child::before {
+    border-width: 1.55rem;
+  }
+}
+
+.service-feature__animation {
+  position: absolute;
+  z-index: 1;
+  right: -8%;
+  bottom: -2%;
+  width: clamp(13rem, 52%, 22rem);
+  aspect-ratio: 1;
+  background: var(--ink);
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  transform: rotate(12deg);
+  transition: transform 0.5s var(--ease);
+}
+
+.service-feature--training:hover .service-feature__animation {
+  transform: rotate(52deg) scale(1.08);
+}
+
+.service-feature--visual .service-feature__animation {
+  background: repeating-conic-gradient(var(--ink) 0 12deg, transparent 12deg 28deg);
+  clip-path: circle(50%);
+  transform: rotate(-8deg);
+}
+
+.service-feature--visual:hover .service-feature__animation {
+  transform: rotate(12deg) scale(1.08);
 }
 
 .service-feature__top {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-wild);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.09em;
@@ -664,22 +777,30 @@ footer[id] {
 
 .service-feature h3 {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 8ch;
-  margin: clamp(4rem, 10vw, 9rem) 0 1.5rem;
+  margin: clamp(3.25rem, 8vw, 7.5rem) 0 1.5rem;
   font-size: clamp(3.5rem, 8vw, 8rem);
   font-weight: 800;
   letter-spacing: -0.075em;
   line-height: 0.82;
+  overflow-wrap: anywhere;
 }
 
 .service-feature__tags {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
   max-width: 36rem;
+}
+
+.service-feature__tags .service-feature__tag-break {
+  flex-basis: 100%;
+  height: 0;
+  padding: 0;
+  border: 0;
 }
 
 .service-feature__tags span,
@@ -696,7 +817,7 @@ footer[id] {
 
 .service-list {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   margin: 0;
   padding: 0;
   color: var(--ink);
@@ -714,15 +835,11 @@ footer[id] {
   border-bottom: 0.12rem solid var(--paper-bright);
 }
 
-.service-card:nth-child(2) {
-  background: var(--pink);
-}
-
-.service-card:nth-child(3) {
+.service-card--production {
   background: var(--signal);
 }
 
-.service-card:nth-child(4) {
+.service-card--visual {
   background: var(--sky);
 }
 
@@ -730,6 +847,8 @@ footer[id] {
   font-family: var(--font-wild);
   font-size: 0.78rem;
   font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
 }
 
 .service-card h3 {
@@ -775,11 +894,25 @@ footer[id] {
   top: 1.5rem;
   right: 1.5rem;
   max-width: 11rem;
+  font-family: var(--font-wild);
   font-size: 0.75rem;
   font-weight: 650;
   line-height: 1.2;
   text-align: right;
   text-transform: uppercase;
+}
+
+.service-card--production .service-card__micro {
+  right: 3.9rem;
+}
+
+.service-card__arrow {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 2;
+  font-size: 1.25rem;
+  font-weight: 800;
 }
 
 .service-card::after {
@@ -795,19 +928,12 @@ footer[id] {
   transition: border-radius 0.35s var(--ease), transform 0.35s var(--ease);
 }
 
-.service-card:nth-child(2)::after {
-  width: 8rem;
-  height: 4rem;
-  border-radius: 0;
-  transform: translateX(-50%) rotate(-8deg);
-}
-
-.service-card:nth-child(3)::after {
+.service-card--production::after {
   background: transparent;
   border: 1rem solid var(--ink);
 }
 
-.service-card:nth-child(4)::after {
+.service-card--visual::after {
   width: 8.5rem;
   height: 8.5rem;
   background: repeating-conic-gradient(var(--ink) 0 12deg, transparent 12deg 28deg);
@@ -1185,6 +1311,10 @@ footer[id] {
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1.15;
+}
+
+.contact__social .diagonal-arrow {
+  display: none;
 }
 
 .contact__email .contact__item-label::before,
@@ -1900,7 +2030,19 @@ footer[id] {
   }
 
   .site-header__inner {
+    position: relative;
     grid-template-columns: 1fr auto;
+  }
+
+  .brand {
+    gap: 0;
+  }
+
+  .brand__logo-shell {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .service-hero__inner {
@@ -2025,6 +2167,19 @@ footer[id] {
     min-height: 34rem;
   }
 
+  .service-feature.service-feature:nth-child(2)::before {
+    height: 50%;
+  }
+
+  .service-feature.service-feature:first-child::before {
+    right: -10%;
+    bottom: -16%;
+  }
+
+  .service-feature__animation {
+    right: -2%;
+  }
+
   .studio-grid {
     grid-template-columns: 1fr;
   }
@@ -2099,21 +2254,6 @@ footer[id] {
     max-width: 34rem;
   }
 
-  .site-header__inner {
-    position: relative;
-  }
-
-  .brand {
-    gap: 0;
-  }
-
-  .brand__logo-shell {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
   .service-statement__grid {
     grid-template-columns: 1fr;
   }
@@ -2161,6 +2301,22 @@ footer[id] {
 
   .service-card {
     min-height: 20rem;
+  }
+
+  .service-feature.service-feature:first-child::before {
+    right: -6%;
+    bottom: -8%;
+    width: 60%;
+  }
+
+  .service-feature.service-feature:nth-child(2)::before {
+    width: 56%;
+    height: 42%;
+  }
+
+  .service-feature__animation {
+    right: -2%;
+    bottom: -2%;
   }
 
   .equipment-list__trigger {
@@ -2246,6 +2402,14 @@ footer[id] {
 
   .gear-callout strong {
     text-align: left;
+  }
+}
+
+@media (max-width: 360px) {
+  .service-feature.service-feature:first-child::before {
+    bottom: -10%;
+    width: 70%;
+    border-width: 0.75rem;
   }
 }
 
