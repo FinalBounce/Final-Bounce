@@ -288,6 +288,10 @@ footer[id] {
   gap: clamp(1rem, 2vw, 2.25rem);
 }
 
+.site-nav__logo {
+  display: none;
+}
+
 .site-nav a {
   position: relative;
   padding-block: 0.6rem;
@@ -321,6 +325,39 @@ footer[id] {
 .site-nav a[aria-current="page"]::after {
   transform: scaleX(1);
   transform-origin: left;
+}
+
+.site-nav__logo::after {
+  display: none;
+}
+
+@media (min-width: 1101px) {
+  .site-header__inner {
+    grid-template-columns: minmax(8rem, 1fr) auto minmax(10rem, 1fr);
+    gap: 1rem;
+  }
+
+  .brand__logo-shell {
+    display: none;
+  }
+
+  .site-nav {
+    gap: clamp(0.75rem, 1.25vw, 1.6rem);
+  }
+
+  .site-nav a.site-nav__logo {
+    display: inline-grid;
+    place-items: center;
+    width: 3.75rem;
+    height: 3.75rem;
+    padding: 0;
+  }
+
+  .site-nav__logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 }
 
 .site-header__cta {
