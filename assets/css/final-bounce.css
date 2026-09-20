@@ -616,20 +616,17 @@ footer[id] {
   background: var(--paper-bright);
 }
 
-.service-feature.service-feature:first-child::before {
-  right: -5%;
-  bottom: -10%;
-  width: 53%;
-  background: transparent;
-  transition: transform 0.55s var(--ease), background-color 0.35s var(--ease);
-}
-
 .service-feature--training {
   background: var(--pink);
 }
 
 .service-feature--visual {
   background: var(--sky);
+}
+
+.service-feature--production {
+  grid-column: 1 / -1;
+  background: var(--signal);
 }
 
 .service-feature.service-feature:nth-child(2)::before {
@@ -659,24 +656,22 @@ footer[id] {
   animation-play-state: paused;
 }
 
-.service-feature:not(.service-feature--training):not(.service-feature--visual):not(:nth-child(2))::before {
+.service-feature.service-feature:first-child::before {
   position: absolute;
   z-index: 0;
-  right: -11%;
-  bottom: -21%;
-  width: 65%;
+  right: -8%;
+  bottom: -2%;
+  width: clamp(13rem, 52%, 22rem);
   aspect-ratio: 1;
   content: "";
-  border: clamp(1rem, 2.5vw, 2.5rem) solid var(--ink);
+  background: transparent;
+  border: 1.25rem solid var(--ink);
   border-radius: 50%;
-  transition: transform 0.55s var(--ease);
-}
-
-.service-feature:not(.service-feature--training):not(.service-feature--visual):not(:nth-child(2)):hover::before {
-  transform: rotate(28deg) scale(1.08);
+  transition: transform 0.55s var(--ease), background-color 0.35s var(--ease);
 }
 
 .service-feature.service-feature:first-child:is(:hover, :focus-visible, :active)::before {
+  transform: rotate(28deg) scale(1.08);
   background: var(--ink);
 }
 
@@ -701,37 +696,6 @@ footer[id] {
 
   66% {
     background-size: 8% 47%, 8% 78%, 8% 41%, 8% 73%, 8% 55%, 8% 84%, 8% 46%;
-  }
-}
-
-@media (min-width: 1101px) and (max-width: 1200px) {
-  .service-feature.service-feature:first-child::before {
-    border-width: 1.35rem;
-  }
-}
-
-@media (min-width: 801px) {
-  .service-feature.service-feature:first-child::before {
-    right: clamp(-4.6rem, calc(-15% - 2.45rem + 4.58vw), -3.8rem);
-    bottom: -10%;
-  }
-}
-
-@media (min-width: 801px) and (max-width: 1100px) {
-  .service-feature.service-feature:first-child::before {
-    border-width: 1rem;
-  }
-}
-
-@media (min-width: 1201px) and (max-width: 1400px) {
-  .service-feature.service-feature:first-child::before {
-    border-width: 1.25rem;
-  }
-}
-
-@media (min-width: 1401px) {
-  .service-feature.service-feature:first-child::before {
-    border-width: 1.55rem;
   }
 }
 
@@ -760,6 +724,55 @@ footer[id] {
 
 .service-feature--visual:hover .service-feature__animation {
   transform: rotate(12deg) scale(1.08);
+}
+
+.service-feature--production .service-feature__animation {
+  background: transparent;
+  border: 0.85rem solid var(--ink);
+  border-radius: 0;
+  clip-path: none;
+  transform: rotate(-12deg);
+  pointer-events: none;
+  transition: transform 0.8s var(--ease);
+}
+
+.service-feature--production .service-feature__animation::before,
+.service-feature--production .service-feature__animation::after {
+  position: absolute;
+  content: "";
+  inset: 17%;
+  border: 0.6rem solid var(--ink);
+  transition: transform 0.8s var(--ease), background-color 0.5s var(--ease);
+}
+
+.service-feature--production .service-feature__animation::after {
+  inset: 36%;
+  border: 0;
+  background: var(--ink);
+  transition-delay: 0.08s;
+}
+
+.service-feature--production:is(:hover, :focus-visible, :active) .service-feature__animation {
+  transform: rotate(8deg) scale(1.06);
+}
+
+.service-feature--production:is(:hover, :focus-visible, :active) .service-feature__animation::before {
+  transform: rotate(45deg) scale(1.05);
+}
+
+.service-feature--production:is(:hover, :focus-visible, :active) .service-feature__animation::after {
+  transform: rotate(90deg) scale(1.2);
+}
+
+@media (min-width: 801px) {
+  .service-feature.service-feature--production h3 {
+    max-width: 68%;
+  }
+
+  .service-feature--production .service-feature__animation {
+    right: -3%;
+    width: clamp(16rem, 30%, 26rem);
+  }
 }
 
 .service-feature__top {
@@ -1625,6 +1638,15 @@ footer[id] {
   font-size: 0.53em;
 }
 
+.page-training .service-hero h1 {
+  max-width: none;
+}
+
+.page-training .service-hero h1 .wild {
+  font-size: 0.6em;
+  white-space: nowrap;
+}
+
 .service-hero__copy {
   padding-bottom: 0.7rem;
 }
@@ -2171,11 +2193,6 @@ footer[id] {
     height: 50%;
   }
 
-  .service-feature.service-feature:first-child::before {
-    right: -10%;
-    bottom: -16%;
-  }
-
   .service-feature__animation {
     right: -2%;
   }
@@ -2303,12 +2320,6 @@ footer[id] {
     min-height: 20rem;
   }
 
-  .service-feature.service-feature:first-child::before {
-    right: -6%;
-    bottom: -8%;
-    width: 60%;
-  }
-
   .service-feature.service-feature:nth-child(2)::before {
     width: 56%;
     height: 42%;
@@ -2405,11 +2416,163 @@ footer[id] {
   }
 }
 
-@media (max-width: 360px) {
-  .service-feature.service-feature:first-child::before {
-    bottom: -10%;
-    width: 70%;
-    border-width: 0.75rem;
+/* Activity accents stay local; every contact section keeps the shared green. */
+.page-visual {
+  --page-accent: var(--sky);
+  --page-accent-2: var(--paper);
+}
+
+.page-production {
+  --page-accent: var(--signal);
+  --page-accent-2: var(--paper);
+}
+
+.page-service-detail:not(.page-training) .service-hero h1 {
+  max-width: 13ch;
+  font-size: clamp(3.1rem, 7.3vw, 7.5rem);
+  letter-spacing: -0.065em;
+  line-height: 0.9;
+  text-transform: none;
+}
+
+.page-service-detail .site-header__cta {
+  background: var(--page-accent);
+}
+
+.page-service-detail .site-header__cta {
+  border-color: var(--page-accent);
+}
+
+.page-service-detail .site-nav a::after {
+  background: var(--page-accent);
+}
+
+.page-service-detail .service-hero__copy .button,
+.service-prepare .button {
+  background: var(--ink);
+  color: var(--paper-bright);
+  border-color: var(--ink);
+}
+
+.page-service-detail .service-hero__copy .button:hover,
+.service-prepare .button:hover {
+  background: var(--paper-bright);
+  color: var(--ink);
+}
+
+.page-training.page-service-detail .service-hero::after {
+  background: var(--ink);
+  border-radius: 0;
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+}
+
+.page-production .service-hero::after {
+  background: transparent;
+  border: 2rem solid var(--ink);
+  border-radius: 0;
+  box-shadow: inset 0 0 0 2rem var(--signal), inset 0 0 0 3rem var(--ink);
+}
+
+.service-next--visual {
+  background: var(--sky);
+}
+
+.service-next--production {
+  background: var(--signal);
+}
+
+.process .service-detail-axes {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.service-workflow {
+  color: var(--paper-bright);
+  background: var(--ink);
+}
+
+.service-workflow__steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.service-workflow__steps li {
+  display: grid;
+  grid-template-columns: minmax(3rem, 0.3fr) minmax(0, 1fr);
+  gap: clamp(1rem, 4vw, 4rem);
+  padding-block: 2rem;
+  border-top: 1px solid rgb(255 253 246 / 30%);
+}
+
+.service-workflow__number {
+  color: var(--page-accent);
+  font-family: var(--font-wild);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+}
+
+.service-workflow__steps h3 {
+  margin-bottom: 1rem;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.service-workflow__steps p {
+  max-width: 42rem;
+  margin-bottom: 0;
+  font-size: 1.15rem;
+}
+
+.service-prepare {
+  margin-top: 3rem;
+  padding: clamp(1.5rem, 4vw, 4rem);
+  color: var(--ink);
+  background: var(--page-accent);
+}
+
+.service-prepare h3 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.service-prepare p {
+  max-width: 48rem;
+  font-size: 1.15rem;
+}
+
+.page-service-detail .contact h2 {
+  font-size: clamp(3rem, 6.5vw, 6.5rem);
+}
+
+.page-service-detail .service-next strong {
+  font-size: clamp(2.6rem, 6.5vw, 6.5rem);
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 800px) {
+  .page-service-detail .service-hero__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .page-service-detail:not(.page-training) .service-hero h1 {
+    font-size: clamp(3.1rem, 10vw, 5.5rem);
+  }
+
+  .page-service-detail .service-hero__copy {
+    max-width: 38rem;
+  }
+
+  .process .service-detail-axes {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .process .service-detail-axes .approach-card {
+    min-height: auto;
   }
 }
 

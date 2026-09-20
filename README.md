@@ -11,6 +11,9 @@ Ce dépôt GitHub est la source de référence du site. Les futurs exports Webfl
 - `index.html` : accueil et présentation de l’ensemble des activités
 - `enregistrement.html` : service d’enregistrement
 - `mixage.html` : service de mixage
+- `formation.html` : formation personnalisée First Bounce
+- `accompagnement-visuel.html` : identité visuelle, pochette et réseaux sociaux
+- `accompagnement-production.html` : accompagnement à la production musicale
 - `assets/css/final-bounce.css` : système graphique et responsive partagé
 - `assets/js/final-bounce.js` : menu mobile, révélations progressives et année du pied de page
 - `assets/brand/` : logo optimisé, favicon et icône pour écran d’accueil
