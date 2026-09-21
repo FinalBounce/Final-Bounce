@@ -626,6 +626,7 @@ footer[id] {
 }
 
 .service-feature--production {
+  container-type: inline-size;
   grid-column: 1 / -1;
   background: var(--signal);
 }
@@ -768,6 +769,7 @@ footer[id] {
 @media (min-width: 801px) {
   .service-feature.service-feature--production h3 {
     max-width: 68%;
+    font-size: clamp(2rem, 7.8cqi, 8rem);
   }
 
   .service-feature--production .service-feature__animation {
@@ -808,6 +810,11 @@ footer[id] {
   flex-wrap: wrap;
   gap: 0.45rem;
   max-width: 36rem;
+}
+
+.service-feature--production h3 span {
+  display: block;
+  white-space: nowrap;
 }
 
 .service-feature__tags .service-feature__tag-break {
@@ -1261,18 +1268,6 @@ footer[id] {
   background: var(--page-accent);
 }
 
-.page-home .contact {
-  background: var(--plum);
-}
-
-.page-home .contact__copy {
-  color: var(--paper-bright);
-}
-
-.page-home .contact__item-label {
-  color: rgb(255 253 246 / 85%);
-}
-
 .contact__grid {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(22rem, 1.1fr);
@@ -1586,7 +1581,7 @@ footer[id] {
 }
 
 .page-equipment-detail {
-  --page-accent: var(--sky);
+  --page-accent: var(--plum);
   --page-accent-2: var(--violet);
 }
 
@@ -1594,7 +1589,7 @@ footer[id] {
   position: relative;
   display: grid;
   min-height: 100svh;
-  padding-top: calc(var(--header-height) + clamp(3rem, 10svh, 7rem));
+  padding-top: calc(var(--header-height) + clamp(5rem, 10vw, 10rem));
   padding-bottom: clamp(2rem, 5svh, 4rem);
   overflow: hidden;
   background: var(--page-accent);
@@ -1666,6 +1661,19 @@ footer[id] {
 
 .page-training .service-hero h1 .wild {
   font-size: 0.6em;
+  white-space: nowrap;
+}
+
+.page-equipment-detail .service-hero__inner > div:first-child {
+  container-type: inline-size;
+}
+
+.page-equipment-detail .service-hero h1 {
+  max-width: none;
+}
+
+.page-equipment-detail .service-hero h1 .wild {
+  font-size: min(0.6em, 11cqi);
   white-space: nowrap;
 }
 
@@ -1834,9 +1842,16 @@ footer[id] {
 }
 
 .gear-card li::before {
+  display: inline-block;
+  width: 0.95em;
+  height: 0.95em;
   margin-right: 0.45rem;
-  content: "↗";
-  font-weight: 750;
+  vertical-align: -0.1em;
+  content: "";
+  background-color: currentColor;
+  /* Draw the arrow instead of letting iOS substitute an emoji glyph. */
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 13 13 3M5 3h8v8' fill='none' stroke='black' stroke-width='1.4'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 13 13 3M5 3h8v8' fill='none' stroke='black' stroke-width='1.4'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
 .gear-callout {
@@ -1920,6 +1935,10 @@ footer[id] {
   background: var(--paper);
 }
 
+.page-recording .process .approach-card:nth-child(4) {
+  background: var(--violet);
+}
+
 .signal-section {
   padding-block: clamp(2rem, 5vw, 4rem);
   overflow: hidden;
@@ -1973,6 +1992,11 @@ footer[id] {
 
 .service-next--training {
   background: var(--pink);
+}
+
+.service-next--equipment {
+  color: var(--paper-bright);
+  background: var(--plum);
 }
 
 .service-next__inner {
@@ -2203,6 +2227,15 @@ footer[id] {
 
   .service-feature {
     min-height: 34rem;
+  }
+
+  .service-feature.service-feature--production h3 {
+    max-width: none;
+    font-size: clamp(2.75rem, 8vw, 5rem);
+  }
+
+  .service-feature--production h3 span {
+    white-space: normal;
   }
 
   .service-feature.service-feature:nth-child(2)::before {
@@ -2665,6 +2698,46 @@ footer[id] {
   .process .service-detail-axes .approach-card {
     min-height: auto;
   }
+}
+
+/* Keep the full-height opening on shorter desktop windows as well. */
+@media (min-width: 801px) and (max-height: 800px) {
+  .service-hero__copy p {
+    font-size: clamp(1.05rem, 1.55vw, 1.3rem);
+  }
+
+  .service-hero__copy .keywords {
+    margin-top: 1rem;
+  }
+}
+
+/* Light lettering keeps the darker equipment theme legible. */
+.page-equipment-detail :is(.service-hero, .signal-section, .contact, .gear-card#conversion, .site-header__cta) {
+  color: var(--paper-bright);
+}
+
+.page-equipment-detail .contact__item-label {
+  color: rgb(255 253 246 / 85%);
+}
+
+.page-equipment-detail .contact-form {
+  color: var(--ink);
+}
+
+.page-equipment-detail .service-hero .keyword {
+  border-color: currentColor;
+}
+
+.page-equipment-detail .button:hover {
+  color: var(--paper-bright);
+}
+
+.page-equipment-detail .site-header__cta:hover {
+  color: var(--ink);
+}
+
+.page-equipment-detail :is(.site-footer h3, .gear-callout strong, .service-statement blockquote em, .site-footer a:hover, .site-footer a:focus-visible) {
+  color: color-mix(in srgb, var(--plum) 65%, var(--paper-bright));
 }
 
 @media (prefers-reduced-motion: reduce) {
