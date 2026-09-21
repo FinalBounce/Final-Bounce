@@ -614,7 +614,7 @@ footer[id] {
 }
 
 .service-feature:first-child {
-  background: var(--paper-bright);
+  background: var(--paper);
 }
 
 .service-feature--training {
@@ -1571,7 +1571,7 @@ footer[id] {
 
 /* Service pages */
 .page-recording {
-  --page-accent: var(--paper-bright);
+  --page-accent: var(--paper);
   --page-accent-2: var(--sky);
 }
 
@@ -1964,7 +1964,7 @@ footer[id] {
 }
 
 .service-next--recording {
-  background: var(--paper-bright);
+  background: var(--paper);
 }
 
 .service-next--mixing {
