@@ -768,8 +768,7 @@ footer[id] {
 
 @media (min-width: 801px) {
   .service-feature.service-feature--production h3 {
-    max-width: 68%;
-    font-size: clamp(2rem, 7.8cqi, 8rem);
+    max-width: none;
   }
 
   .service-feature--production .service-feature__animation {
@@ -812,7 +811,7 @@ footer[id] {
   max-width: 36rem;
 }
 
-.service-feature--production h3 span {
+.service-feature--production h3 > span {
   display: block;
   white-space: nowrap;
 }
@@ -2231,10 +2230,9 @@ footer[id] {
 
   .service-feature.service-feature--production h3 {
     max-width: none;
-    font-size: clamp(2.75rem, 8vw, 5rem);
   }
 
-  .service-feature--production h3 span {
+  .service-feature--production h3 > span {
     white-space: normal;
   }
 
@@ -2332,6 +2330,10 @@ footer[id] {
 }
 
 @media (max-width: 540px) {
+  .service-feature__production-suffix {
+    display: none;
+  }
+
   .site-header__inner {
     gap: 0.75rem;
   }
